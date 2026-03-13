@@ -61,7 +61,7 @@ export default function Problems() {
   }, []);
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32">
+    <section ref={ref} id="problems" className="relative py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div

@@ -95,7 +95,7 @@ export default function FlowDemo() {
   const sectionVisible = started;
 
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-32">
+    <section ref={sectionRef} id="how-it-works" className="relative py-24 md:py-32">
       <div className="max-w-5xl mx-auto px-6">
         {/* Header */}
         <div

@@ -40,7 +40,7 @@ export default function MCPOrbit() {
   }, []);
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 overflow-hidden">
+    <section ref={ref} id="integrations" className="relative py-24 md:py-32 overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-accent/[0.03] blur-[180px] pointer-events-none" />
 
@@ -186,17 +186,6 @@ export default function MCPOrbit() {
         </div>
       </div>
 
-      {/* CSS for orbit spin */}
-      <style jsx>{`
-        @keyframes spin-slow {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-      `}</style>
     </section>
   );
 }
@@ -233,8 +222,8 @@ function ToolNode({
     <div
       className="absolute"
       style={{
-        top: `${50 - radius * Math.cos((angle * Math.PI) / 180)}%`,
-        left: `${50 + radius * Math.sin((angle * Math.PI) / 180)}%`,
+        top: `${Math.round((50 - radius * Math.cos((angle * Math.PI) / 180)) * 100) / 100}%`,
+        left: `${Math.round((50 + radius * Math.sin((angle * Math.PI) / 180)) * 100) / 100}%`,
         transform: "translate(-50%, -50%)",
       }}
     >
@@ -279,16 +268,6 @@ function ToolNode({
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes spin-counter {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-      `}</style>
     </div>
   );
 }
@@ -311,21 +290,6 @@ function Pulse({ delay, angle }: { delay: number; angle: number }) {
           left: "-0.75px",
         }}
       />
-      <style jsx>{`
-        @keyframes pulse-out {
-          0% {
-            transform: translateY(0);
-            opacity: 0.6;
-          }
-          50% {
-            opacity: 0.3;
-          }
-          100% {
-            transform: translateY(-200px);
-            opacity: 0;
-          }
-        }
-      `}</style>
     </div>
   );
 }
