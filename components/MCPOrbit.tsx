@@ -1,6 +1,8 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
+import Image from "next/image";
+import { trackSectionViewed } from "@/lib/analytics";
 
 /* ─── Tool definitions with brand colors ─── */
 
@@ -24,14 +26,29 @@ const outerRing = [
   { name: "Notion", abbr: "No", color: "#FFFFFFCC" },
 ];
 
+/* ─── Orbital position helper ─── */
+function getOrbitPos(angle: number, radius: number) {
+  const rad = (angle * Math.PI) / 180;
+  return {
+    top: `${Math.round((50 - radius * Math.cos(rad)) * 100) / 100}%`,
+    left: `${Math.round((50 + radius * Math.sin(rad)) * 100) / 100}%`,
+  };
+}
+
 export default function MCPOrbit() {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [rotation, setRotation] = useState(0);
+  const rafRef = useRef<number>(0);
+  const lastTimeRef = useRef<number>(0);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting) setVisible(true);
+        if (e.isIntersecting) {
+          setVisible(true);
+          trackSectionViewed("integrations");
+        }
       },
       { threshold: 0.15 },
     );
@@ -39,8 +56,24 @@ export default function MCPOrbit() {
     return () => obs.disconnect();
   }, []);
 
+  /* JS-driven rotation — logos stay perfectly upright */
+  const animate = useCallback((time: number) => {
+    if (lastTimeRef.current === 0) lastTimeRef.current = time;
+    const delta = time - lastTimeRef.current;
+    lastTimeRef.current = time;
+    // ~4 degrees per second = full rotation in 90s
+    setRotation((prev) => (prev + (delta / 1000) * 4) % 360);
+    rafRef.current = requestAnimationFrame(animate);
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+    rafRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [visible, animate]);
+
   return (
-    <section ref={ref} id="integrations" className="relative py-24 md:py-32 overflow-hidden">
+    <section ref={ref} id="integrations" aria-labelledby="integrations-heading" className="relative py-24 md:py-32 overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-accent/[0.03] blur-[180px] pointer-events-none" />
 
@@ -54,7 +87,7 @@ export default function MCPOrbit() {
           <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent/70 mb-4">
             Connected Ecosystem
           </span>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-tight mb-4">
+          <h2 id="integrations-heading" className="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-tight mb-4">
             Plan here.{" "}
             <span className="text-text-secondary">Build anywhere.</span>
           </h2>
@@ -72,57 +105,46 @@ export default function MCPOrbit() {
           {/* Orbit container — fixed aspect ratio */}
           <div className="relative w-full max-w-[600px] aspect-square mx-auto">
 
-            {/* Outer orbit ring */}
-            <div
-              className="absolute inset-0 rounded-full border border-border/30"
-              style={{
-                animation: visible
-                  ? "spin-slow 90s linear infinite"
-                  : "none",
-              }}
-            >
-              {outerRing.map((tool, i) => {
-                const angle = (360 / outerRing.length) * i;
-                return (
-                  <ToolNode
-                    key={tool.name}
-                    tool={tool}
-                    angle={angle}
-                    radius={50}
-                    orbitDirection="reverse"
-                    visible={visible}
-                    delay={600 + i * 80}
-                    size="sm"
-                  />
-                );
-              })}
-            </div>
+            {/* Outer orbit track (static ring) */}
+            <div className="absolute inset-0 rounded-full border border-border/30" />
 
-            {/* Inner orbit ring */}
-            <div
-              className="absolute inset-[18%] rounded-full border border-border/40"
-              style={{
-                animation: visible
-                  ? "spin-slow 60s linear infinite reverse"
-                  : "none",
-              }}
-            >
-              {innerRing.map((tool, i) => {
-                const angle = (360 / innerRing.length) * i;
-                return (
-                  <ToolNode
-                    key={tool.name}
-                    tool={tool}
-                    angle={angle}
-                    radius={50}
-                    orbitDirection="normal"
-                    visible={visible}
-                    delay={300 + i * 80}
-                    size="md"
-                  />
-                );
-              })}
-            </div>
+            {/* Outer orbit nodes — positioned via JS, NO CSS rotation on content */}
+            {outerRing.map((tool, i) => {
+              const baseAngle = (360 / outerRing.length) * i;
+              const currentAngle = baseAngle + rotation;
+              const pos = getOrbitPos(currentAngle, 50);
+              return (
+                <ToolNode
+                  key={tool.name}
+                  tool={tool}
+                  pos={pos}
+                  visible={visible}
+                  delay={600 + i * 80}
+                  size="sm"
+                />
+              );
+            })}
+
+            {/* Inner orbit track (static ring) */}
+            <div className="absolute inset-[18%] rounded-full border border-border/40" />
+
+            {/* Inner orbit nodes — rotate opposite direction */}
+            {innerRing.map((tool, i) => {
+              const baseAngle = (360 / innerRing.length) * i;
+              const currentAngle = baseAngle - rotation * 1.5; // faster, opposite
+              const pos = getOrbitPos(currentAngle, 50);
+              return (
+                <ToolNode
+                  key={tool.name}
+                  tool={tool}
+                  pos={pos}
+                  visible={visible}
+                  delay={300 + i * 80}
+                  size="md"
+                  ring="inner"
+                />
+              );
+            })}
 
             {/* MCP Connection pulses */}
             {visible && (
@@ -151,11 +173,15 @@ export default function MCPOrbit() {
                 />
 
                 {/* Core */}
-                <div className="relative w-full h-full rounded-full bg-bg-card border border-accent/25 flex flex-col items-center justify-center shadow-[0_0_60px_rgba(0,232,162,0.12)]">
-                  <span className="font-display text-2xl md:text-3xl font-extrabold text-text tracking-tight">
-                    trilo
-                    <span className="text-accent">.</span>
-                  </span>
+                <div className="relative w-full h-full rounded-full bg-bg-card border border-accent/25 flex flex-col items-center justify-center shadow-[0_0_60px_rgba(0,232,162,0.12)] overflow-hidden">
+                  <Image
+                    src="/trilo-logo.png"
+                    alt="Trilo — MCP Hub"
+                    width={120}
+                    height={120}
+                    className="w-[60%] h-[60%] object-contain rounded-xl"
+                    priority
+                  />
                   <span className="text-[10px] md:text-xs font-mono text-accent/60 tracking-[0.15em] uppercase mt-1">
                     MCP Hub
                   </span>
@@ -185,28 +211,24 @@ export default function MCPOrbit() {
           ))}
         </div>
       </div>
-
     </section>
   );
 }
 
-/* ─── Orbiting Tool Node ─── */
+/* ─── Orbiting Tool Node (NO rotation — stays upright) ─── */
 
 interface ToolNodeProps {
   tool: { name: string; abbr: string; color: string };
-  angle: number;
-  radius: number;
-  orbitDirection: "normal" | "reverse";
+  pos: { top: string; left: string };
   visible: boolean;
   delay: number;
   size: "sm" | "md";
+  ring?: "inner" | "outer";
 }
 
 function ToolNode({
   tool,
-  angle,
-  radius,
-  orbitDirection,
+  pos,
   visible,
   delay,
   size,
@@ -214,17 +236,17 @@ function ToolNode({
   const nodeSize = size === "md" ? "w-12 h-12 md:w-14 md:h-14" : "w-10 h-10 md:w-12 md:h-12";
   const fontSize = size === "md" ? "text-xs md:text-sm" : "text-[10px] md:text-xs";
 
-  /* Counter-rotate so the icon stays upright while orbit spins */
-  const counterDuration = orbitDirection === "reverse" ? "90s" : "60s";
-  const counterDirection = orbitDirection === "reverse" ? "normal" : "reverse";
-
   return (
     <div
       className="absolute"
       style={{
-        top: `${Math.round((50 - radius * Math.cos((angle * Math.PI) / 180)) * 100) / 100}%`,
-        left: `${Math.round((50 + radius * Math.sin((angle * Math.PI) / 180)) * 100) / 100}%`,
+        top: pos.top,
+        left: pos.left,
         transform: "translate(-50%, -50%)",
+        /* Position inside the inner ring area for inner nodes */
+        ...(size === "md"
+          ? { top: `${18 + (parseFloat(pos.top) / 100) * 64}%`, left: `${18 + (parseFloat(pos.left) / 100) * 64}%` }
+          : {}),
       }}
     >
       <div
@@ -235,10 +257,6 @@ function ToolNode({
           transitionDuration: "500ms",
           transitionDelay: `${delay}ms`,
           transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-          /* Counter-rotate to stay upright */
-          animation: visible
-            ? `spin-counter ${counterDuration} linear infinite ${counterDirection}`
-            : "none",
         }}
       >
         {/* Glow on hover */}
@@ -267,7 +285,6 @@ function ToolNode({
           {tool.name}
         </div>
       </div>
-
     </div>
   );
 }

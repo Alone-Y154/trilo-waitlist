@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
+import { trackClick } from "@/lib/analytics";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -21,13 +23,24 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="font-display text-xl font-bold text-text tracking-tight">
-          trilo<span className="text-accent">.</span>
+        <a href="#" onClick={() => trackClick("navbar", "Logo", "#")} className="flex items-center gap-2">
+          <Image
+            src="/trilo-logo.png"
+            alt="Trilo"
+            width={32}
+            height={32}
+            className="rounded-lg"
+            priority
+          />
+          <span className="font-display text-xl font-bold text-text tracking-tight">
+            trilo<span className="text-accent">.</span>
+          </span>
         </a>
 
         {/* CTA */}
         <a
           href="#waitlist"
+          onClick={() => trackClick("navbar", "Join Waitlist", "#waitlist")}
           className="h-9 px-5 flex items-center rounded-lg bg-accent/10 text-accent text-sm font-medium border border-accent/20 hover:bg-accent/20 hover:border-accent/30 transition-all duration-200"
         >
           Join Waitlist

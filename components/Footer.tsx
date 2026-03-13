@@ -1,9 +1,23 @@
+"use client";
+
+import Image from "next/image";
+import { trackSocialClick } from "@/lib/analytics";
+
 export default function Footer() {
   return (
     <footer className="border-t border-border/50">
       <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <span className="font-display text-base font-bold text-text-dim tracking-tight">
-          trilo<span className="text-accent/50">.</span>
+        <span className="flex items-center gap-2">
+          <Image
+            src="/trilo-logo.png"
+            alt="Trilo"
+            width={24}
+            height={24}
+            className="rounded-md opacity-60"
+          />
+          <span className="font-display text-base font-bold text-text-dim tracking-tight">
+            trilo<span className="text-accent/50">.</span>
+          </span>
         </span>
 
         <div className="flex items-center gap-6 text-sm text-text-dim">
@@ -11,6 +25,7 @@ export default function Footer() {
             href="https://twitter.com"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackSocialClick("twitter", "https://twitter.com")}
             className="hover:text-text-secondary transition-colors duration-200"
             aria-label="Twitter"
           >
@@ -22,6 +37,7 @@ export default function Footer() {
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackSocialClick("github", "https://github.com")}
             className="hover:text-text-secondary transition-colors duration-200"
             aria-label="GitHub"
           >

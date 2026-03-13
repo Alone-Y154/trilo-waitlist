@@ -2,6 +2,8 @@
 
 import { useRef, useEffect, useState } from "react";
 
+import { trackSectionViewed } from "@/lib/analytics";
+
 const problems = [
   {
     icon: (
@@ -52,7 +54,10 @@ export default function Problems() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
+        if (entry.isIntersecting) {
+          setVisible(true);
+          trackSectionViewed("problems");
+        }
       },
       { threshold: 0.15 }
     );
@@ -61,7 +66,7 @@ export default function Problems() {
   }, []);
 
   return (
-    <section ref={ref} id="problems" className="relative py-24 md:py-32">
+    <section ref={ref} id="problems" aria-labelledby="problems-heading" className="relative py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div
@@ -72,7 +77,7 @@ export default function Problems() {
           <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent/70 mb-4">
             The Problem
           </span>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-tight">
+          <h2 id="problems-heading" className="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-tight">
             Building software is a{" "}
             <span className="text-text-secondary">maze of decisions</span>
           </h2>

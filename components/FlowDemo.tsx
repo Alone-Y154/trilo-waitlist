@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { trackSectionViewed } from "@/lib/analytics";
 
 const TYPED_TEXT = "A SaaS analytics dashboard with AI-powered insights";
 
@@ -40,6 +41,7 @@ export default function FlowDemo() {
         if (e.isIntersecting && !hasStarted.current) {
           hasStarted.current = true;
           setStarted(true);
+          trackSectionViewed("how_it_works");
         }
       },
       { threshold: 0.25 }
@@ -95,7 +97,7 @@ export default function FlowDemo() {
   const sectionVisible = started;
 
   return (
-    <section ref={sectionRef} id="how-it-works" className="relative py-24 md:py-32">
+    <section ref={sectionRef} id="how-it-works" aria-labelledby="how-it-works-heading" className="relative py-24 md:py-32">
       <div className="max-w-5xl mx-auto px-6">
         {/* Header */}
         <div
@@ -106,7 +108,7 @@ export default function FlowDemo() {
           <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent/70 mb-4">
             How It Works
           </span>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-tight mb-4">
+          <h2 id="how-it-works-heading" className="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-tight mb-4">
             See Trilo in action
           </h2>
           <p className="text-text-secondary text-lg max-w-xl mx-auto">

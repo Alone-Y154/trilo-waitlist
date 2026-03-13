@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { trackWaitlistSubmit, trackWaitlistSuccess, trackWaitlistError } from "@/lib/analytics";
 
 interface WaitlistFormProps {
   variant?: "default" | "large";
+  location?: string;
 }
 
-export default function WaitlistForm({ variant = "default" }: WaitlistFormProps) {
+export default function WaitlistForm({ variant = "default", location = "unknown" }: WaitlistFormProps) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -17,15 +19,18 @@ export default function WaitlistForm({ variant = "default" }: WaitlistFormProps)
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setStatus("error");
       setErrorMsg("Please enter a valid email address");
+      trackWaitlistError(location, "Please enter a valid email address");
       return;
     }
 
     setStatus("loading");
+    trackWaitlistSubmit(location, email);
 
     // TODO: Replace with your actual API endpoint (e.g., Resend, ConvertKit, Supabase)
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
     setStatus("success");
+    trackWaitlistSuccess(location);
   };
 
   if (status === "success") {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import { trackSectionViewed } from "@/lib/analytics";
 import WaitlistForm from "./WaitlistForm";
 
 export default function FinalCTA() {
@@ -10,7 +11,10 @@ export default function FinalCTA() {
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting) setVisible(true);
+        if (e.isIntersecting) {
+          setVisible(true);
+          trackSectionViewed("final_cta");
+        }
       },
       { threshold: 0.2 }
     );
@@ -19,7 +23,7 @@ export default function FinalCTA() {
   }, []);
 
   return (
-    <section ref={ref} id="waitlist" className="relative py-24 md:py-36 overflow-hidden">
+    <section ref={ref} id="waitlist" aria-labelledby="waitlist-heading" className="relative py-24 md:py-36 overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/[0.04] blur-[150px] pointer-events-none" />
 
@@ -34,7 +38,7 @@ export default function FinalCTA() {
         {/* Accent line */}
         <div className="w-12 h-px bg-accent/40 mx-auto mb-8" />
 
-        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-5">
+        <h2 id="waitlist-heading" className="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-5">
           Be the first to{" "}
           <span className="gradient-text">plan smarter</span>
         </h2>
@@ -46,7 +50,7 @@ export default function FinalCTA() {
 
         {/* Form */}
         <div className="flex justify-center mb-8">
-          <WaitlistForm variant="large" />
+          <WaitlistForm variant="large" location="final_cta" />
         </div>
 
         {/* Trust */}

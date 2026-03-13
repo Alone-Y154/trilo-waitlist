@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import { trackSectionViewed } from "@/lib/analytics";
 
 const features = [
   {
@@ -82,7 +83,10 @@ export default function Features() {
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting) setVisible(true);
+        if (e.isIntersecting) {
+          setVisible(true);
+          trackSectionViewed("features");
+        }
       },
       { threshold: 0.1 }
     );
@@ -91,7 +95,7 @@ export default function Features() {
   }, []);
 
   return (
-    <section ref={ref} id="features" className="relative py-24 md:py-32">
+    <section ref={ref} id="features" aria-labelledby="features-heading" className="relative py-24 md:py-32">
       {/* Subtle background accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-accent/[0.02] blur-[200px] pointer-events-none" />
 
@@ -105,7 +109,7 @@ export default function Features() {
           <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent/70 mb-4">
             What You Get
           </span>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-tight mb-4">
+          <h2 id="features-heading" className="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-tight mb-4">
             A complete engineering blueprint
           </h2>
           <p className="text-text-secondary text-lg max-w-2xl mx-auto">

@@ -2,7 +2,7 @@ import WaitlistForm from "./WaitlistForm";
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" aria-labelledby="hero-heading" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background layers */}
       <div className="absolute inset-0 dot-grid" />
       <div className="absolute inset-0 vignette" />
@@ -48,6 +48,7 @@ export default function Hero() {
 
         {/* Headline */}
         <h1
+          id="hero-heading"
           className="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[1.05] tracking-tight mb-6"
           style={{ animation: "fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both" }}
         >
@@ -71,7 +72,7 @@ export default function Hero() {
           className="flex justify-center"
           style={{ animation: "fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both" }}
         >
-          <WaitlistForm />
+          <WaitlistForm location="hero" />
         </div>
 
         {/* Social proof */}
