@@ -106,6 +106,7 @@ export default function VideoShowcase() {
               <video
                 ref={videoRef}
                 src="/Trilo__Idea_to_Execution.mp4"
+                poster="/api/video-thumbnail"
                 controls
                 controlsList="nodownload"
                 playsInline

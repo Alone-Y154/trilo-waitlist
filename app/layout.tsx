@@ -292,18 +292,27 @@ const videoSchema = {
   name: "Trilo — From Idea to Execution",
   description:
     "Watch how Trilo transforms your product idea into a complete engineering blueprint with AI-powered architecture planning, tech stack recommendations, timelines, and cost estimates.",
-  thumbnailUrl: `${SITE_URL}/trilo-logo.png`,
+  thumbnailUrl: `${SITE_URL}/api/video-thumbnail`,
   uploadDate: "2026-03-13T00:00:00Z",
   contentUrl: `${SITE_URL}/Trilo__Idea_to_Execution.mp4`,
   embedUrl: `${SITE_URL}/#demo`,
   duration: "PT2M",
+  isFamilyFriendly: true,
+  inLanguage: "en",
+  requiresSubscription: false,
   publisher: {
     "@type": "Organization",
     name: "Trilo",
     logo: {
       "@type": "ImageObject",
       url: `${SITE_URL}/trilo-logo.png`,
+      width: 1024,
+      height: 1024,
     },
+  },
+  potentialAction: {
+    "@type": "WatchAction",
+    target: `${SITE_URL}/#demo`,
   },
 };
 
