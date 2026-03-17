@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { trackSocialClick } from "@/lib/analytics";
 
 export default function Footer() {
@@ -49,6 +50,21 @@ export default function Footer() {
               />
             </svg>
           </a>
+        </div>
+
+        <div className="flex items-center gap-4 text-xs text-text-dim">
+          <Link
+            href="/privacy"
+            className="hover:text-text-secondary transition-colors duration-200"
+          >
+            Privacy
+          </Link>
+          <Link
+            href="/terms"
+            className="hover:text-text-secondary transition-colors duration-200"
+          >
+            Terms
+          </Link>
         </div>
 
         <span className="text-xs text-text-dim">

@@ -221,7 +221,35 @@ Two complementary SEO skills — `seo-geo` for comprehensive traditional + AI SE
 
 ---
 
-### 🚀 Launch & Strategy
+### � Legal & Compliance
+
+These skills handle legal pages — privacy policies, terms of service, and compliance documentation.
+
+#### `privacy-policy`
+
+> **Path:** `.agents/skills/privacy-policy/SKILL.md`
+
+| | |
+|---|---|
+| **Purpose** | Draft comprehensive, clear, and compliant privacy policies covering data types, jurisdiction, GDPR/CCPA considerations, and clauses needing legal review. Plain-language explanations. |
+| **Activate when** | User asks to create a privacy policy, update data protection documentation, add cookie policy, or prepare for compliance. |
+| **Keywords** | privacy policy, privacy page, data protection, GDPR, CCPA, cookie policy, data collection, user rights, data retention |
+| **Important** | Output is informational only — always recommend legal review before publication. |
+
+#### `terms-page-generator`
+
+> **Path:** `.agents/skills/terms-page-generator/SKILL.md`
+
+| | |
+|---|---|
+| **Purpose** | Guide Terms of Service page content, structure, and compliance — acceptance, service description, user obligations, IP, liability, termination, governing law. |
+| **Activate when** | User asks to create terms of service, terms and conditions, user agreement, or any legal terms page. |
+| **Keywords** | terms of service, terms and conditions, terms of use, user agreement, ToS, legal terms, service agreement, terms page |
+| **Related** | Often linked with `privacy-policy`. |
+
+---
+
+### �🚀 Launch & Strategy
 
 #### `launch-strategy`
 
@@ -294,6 +322,8 @@ Common task patterns and which skills to combine:
 | Build a design system | `tailwind-design-system` | `frontend-design-system` + `ui-ux-pro-max` |
 | Choose colors/fonts/style | `ui-ux-pro-max` | `frontend-design` |
 | Make UI responsive | `frontend-responsive-design-standards` | `tailwind-design-system` |
+| Create privacy policy | `privacy-policy` | `frontend-design` + `tailwind-design-system` |
+| Create terms of service | `terms-page-generator` | `privacy-policy` (link together) |
 
 ---
 
@@ -330,3 +360,5 @@ When multiple skills conflict, follow this precedence:
 | "do you remember" / "last time" | `remembering-conversations` |
 | "execute the plan" | `executing-plans` |
 | "agent memory" / "proactive" | `proactive-agent` |
+| "privacy policy" / "cookie policy" / "GDPR" | `privacy-policy` |
+| "terms of service" / "ToS" / "terms page" | `terms-page-generator` |

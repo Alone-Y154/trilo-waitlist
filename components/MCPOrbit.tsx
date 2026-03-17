@@ -88,11 +88,11 @@ export default function MCPOrbit() {
             Connected Ecosystem
           </span>
           <h2 id="integrations-heading" className="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-tight mb-4">
-            Plan here.{" "}
+            Decide here.{" "}
             <span className="text-text-secondary">Build anywhere.</span>
           </h2>
           <p className="text-text-secondary text-lg max-w-2xl mx-auto leading-relaxed">
-            Trilo creates your blueprint, then sends it directly to your favorite build platform via MCP — so you go from plan to code without copy-pasting a thing.
+            Trilo syncs your decisions, architecture context, and execution state directly into your favorite tools — so nothing gets lost between where you plan and where you build.
           </p>
         </div>
 
@@ -176,14 +176,14 @@ export default function MCPOrbit() {
                 <div className="relative w-full h-full rounded-full bg-bg-card border border-accent/25 flex flex-col items-center justify-center shadow-[0_0_60px_rgba(0,232,162,0.12)] overflow-hidden">
                   <Image
                     src="/trilo-logo.png"
-                    alt="Trilo — MCP Hub"
+                    alt="Trilo — Connected to your tools"
                     width={120}
                     height={120}
                     className="w-[60%] h-[60%] object-contain rounded-xl"
                     priority
                   />
                   <span className="text-[10px] md:text-xs font-mono text-accent/60 tracking-[0.15em] uppercase mt-1">
-                    MCP Hub
+                    Connected
                   </span>
                 </div>
               </div>

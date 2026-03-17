@@ -107,7 +107,7 @@ export async function GET() {
             marginBottom: "8px",
           }}
         >
-          From Idea to Execution
+          Decide. Compare. Build.
         </div>
 
         <div
@@ -117,7 +117,7 @@ export async function GET() {
             textAlign: "center",
           }}
         >
-          See how Trilo transforms your workflow
+          See how Trilo guides every decision
         </div>
 
         {/* Bottom bar */}

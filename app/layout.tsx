@@ -22,58 +22,66 @@ const GA_MEASUREMENT_ID = "G-RJBVRJNB2V";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Trilo — From Idea to Architecture in Minutes | AI Software Planning",
+    default: "Trilo — Decide, Compare, Build. Continuously.",
     template: "%s | Trilo",
   },
   description:
-    "Turn your product idea into a complete engineering blueprint. Get AI-powered technology stack recommendations, system architecture design, realistic timelines, and cost estimates — then send your plan to Cursor, Replit, or Lovable via MCP to start building.",
+    "Trilo is a state-aware product development system that continuously guides builders in deciding, comparing, and executing how their product is built — while preserving clarity at every step. Memory-backed architecture decisions, trade-off comparisons, and execution tracking — connected to your IDE via MCP.",
   keywords: [
-    // ── Primary product terms ──
-    "software architecture planner",
-    "AI development planning",
-    "tech stack recommendation tool",
-    "solution architect AI",
-    "system design tool",
-    "project estimation software",
-    "software blueprint generator",
-    "development cost estimator",
-    "architecture decision tool",
+    // ── Core identity ──
+    "state-aware development system",
+    "continuous product guidance",
+    "AI decision system for builders",
+    "persistent solution architect",
+    "product development guidance system",
+    "decision loop with memory",
+    "AI architecture advisor",
+    // ── Decision & comparison ──
+    "tech stack comparison tool",
+    "build vs buy analysis",
+    "architecture trade-off comparison",
+    "decision tracking software",
+    "software architecture decisions",
+    "AI-powered decision support",
+    "compare development approaches",
+    "technology evaluation tool",
+    // ── Memory & state ──
+    "stateful AI planning",
+    "context-aware development tool",
+    "RAG-powered development assistant",
+    "decision memory system",
+    "architecture decision record",
+    "structured state management",
+    // ── Execution & tracking ──
+    "development execution tracking",
+    "architecture to execution pipeline",
+    "task breakdown from decisions",
+    "development milestone tracking",
+    "planning and execution connected",
     // ── MCP / Integrations ──
     "MCP integration",
     "Model Context Protocol",
     "Cursor AI integration",
+    "VS Code AI planning",
     "Replit integration",
     "Lovable integration",
     "Bolt.new integration",
-    "VS Code AI planning",
     "Windsurf integration",
-    // ── Use-case keywords ──
-    "AI project planning",
-    "software development planner",
-    "startup tech stack",
-    "engineering blueprint",
-    "build vs buy analysis",
-    "development timeline estimator",
-    "software architecture automation",
-    "AI solution architect",
-    "automated system design",
-    "project scope estimator",
-    // ── Audience keywords ──
+    // ── Audience ──
     "tools for startup CTOs",
     "founder development tools",
     "product manager tech planning",
     "solo developer architecture",
     "engineering team planning software",
     // ── Long-tail / semantic ──
-    "how to plan software architecture",
-    "AI that designs software systems",
-    "generate tech stack from idea",
-    "software planning tool 2026",
-    "idea to code pipeline",
-    "blueprint to code workflow",
-    "architecture as a service",
-    "pre-development planning AI",
-    "Trilo software planner",
+    "how to make better architecture decisions",
+    "AI that remembers your tech decisions",
+    "continuous software planning tool",
+    "guided product development AI",
+    "what should I build next AI",
+    "reduce uncertainty in software development",
+    "clarity in product development",
+    "Trilo development system",
     "trilo.dev",
   ],
   applicationName: "Trilo",
@@ -116,9 +124,9 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   openGraph: {
-    title: "Trilo — From Idea to Architecture in Minutes",
+    title: "Trilo — Decide, Compare, Build. Continuously.",
     description:
-      "Describe what you want to build. Get a complete engineering blueprint — stack, architecture, timeline, and cost. Then send it to your favorite build platform via MCP.",
+      "A state-aware system that continuously guides builders in deciding, comparing, and executing how their product is built. Memory-backed decisions, trade-off analysis, and execution tracking — connected to your IDE via MCP.",
     type: "website",
     siteName: "Trilo",
     url: SITE_URL,
@@ -127,9 +135,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Trilo — From Idea to Architecture in Minutes",
+    title: "Trilo — Decide, Compare, Build. Continuously.",
     description:
-      "Describe what you want to build. Get a complete engineering blueprint — then send it to Cursor, Replit, or Lovable via MCP.",
+      "A state-aware product development system. Memory-backed architecture decisions, trade-off comparisons, and execution tracking — connected to Cursor, VS Code, and more via MCP.",
     creator: "@trilodev",
     site: "@trilodev",
     // Twitter image auto-generated by app/twitter-image.tsx
@@ -165,7 +173,7 @@ const organizationSchema = {
   url: SITE_URL,
   logo: `${SITE_URL}/trilo-logo.png`,
   description:
-    "AI-powered software architecture and development planning platform.",
+    "Trilo builds a state-aware product development system that continuously guides builders through architecture decisions, trade-off comparisons, and execution — while preserving clarity at every step.",
   sameAs: [
     "https://twitter.com/trilodev",
     "https://github.com/trilodev",
@@ -178,7 +186,7 @@ const softwareSchema = {
   "@type": "SoftwareApplication",
   name: "Trilo",
   description:
-    "Turn your product idea into a complete engineering blueprint with AI-powered architecture planning, tech stack recommendations, timelines, and cost estimates.",
+    "A state-aware product development system that continuously guides builders in deciding, comparing, and executing how their product is built. Memory-backed decisions, structured comparisons, execution tracking, and MCP integration with your IDE.",
   url: SITE_URL,
   applicationCategory: "DeveloperApplication",
   operatingSystem: "Web",
@@ -190,13 +198,13 @@ const softwareSchema = {
     description: "Join the waitlist — launching 2026",
   },
   featureList: [
-    "AI-powered tech stack recommendations",
-    "System architecture design",
-    "Development timeline estimation",
-    "Cost estimation",
-    "Scenario comparison (build vs buy)",
-    "Execution roadmap generation",
-    "MCP integration with Cursor, Replit, Lovable, and more",
+    "State-aware intelligence — remembers every architecture decision, constraint, and trade-off",
+    "Continuous guidance — ask 'what should I do next?' and get contextual answers",
+    "Compare & simulation engine — evaluate approaches by time, cost, and complexity before committing",
+    "Decision ownership — recommendations you can accept, reject, or override",
+    "Trilo Board — execution tracking with tasks and milestones linked to decisions",
+    "MCP integration — guidance appears inside Cursor, VS Code, and other build tools",
+    "Structured state + semantic memory (RAG) — not chat history, real decision records",
   ],
   creator: {
     "@type": "Organization",
@@ -207,9 +215,9 @@ const softwareSchema = {
 const webPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Trilo — From Idea to Architecture in Minutes",
+  name: "Trilo — Decide, Compare, Build. Continuously.",
   description:
-    "Turn your product idea into a complete engineering blueprint. AI-powered software architecture planning with MCP integrations.",
+    "A state-aware product development system that guides builders through every decision — from architecture to execution — with memory, comparison, and continuous clarity.",
   url: SITE_URL,
   isPartOf: {
     "@type": "WebSite",
@@ -218,7 +226,7 @@ const webPageSchema = {
   },
   about: {
     "@type": "Thing",
-    name: "Software Architecture Planning",
+    name: "Product Development Decision System",
   },
   significantLink: `${SITE_URL}/#waitlist`,
 };
@@ -232,7 +240,7 @@ const faqSchema = {
       name: "What is Trilo?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Trilo is an AI-powered software architecture and development planning platform. You describe what you want to build, and Trilo generates a complete engineering blueprint including technology stack recommendations, system architecture design, development timelines, and cost estimates.",
+        text: "Trilo is a state-aware product development system that continuously guides builders in deciding, comparing, and executing how their product is built. It remembers every architecture decision, constraint, and trade-off — then uses that context to guide what should happen next. It is not a one-time planner or a passive assistant. It is a continuous system that stays with your product.",
       },
     },
     {
@@ -240,7 +248,7 @@ const faqSchema = {
       name: "How does Trilo use MCP (Model Context Protocol)?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Trilo creates your engineering blueprint, then sends it directly to your favorite build platform — like Cursor, Replit, Lovable, Bolt.new, or VS Code — via the Model Context Protocol (MCP). This means you go from idea to code-ready plan to actual building in one seamless workflow.",
+        text: "Trilo connects with development tools like Cursor, VS Code, Replit, Lovable, and others via the Model Context Protocol (MCP). This means Trilo's guidance appears inside your development workflow — not as a separate tool you switch to, but as a system you work with. Your decisions, comparisons, and execution context travel with you into your IDE.",
       },
     },
     {
@@ -248,7 +256,7 @@ const faqSchema = {
       name: "Who is Trilo for?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Trilo is built for founders, product managers, solo developers, startup CTOs, and engineering teams who want to make informed architecture decisions before writing code. It eliminates guesswork from technology selection, timeline estimation, and cost planning.",
+        text: "Trilo is built for founders, product managers, solo developers, startup CTOs, and engineering teams who need continuous clarity throughout product development. If you've ever lost track of why a decision was made, underestimated complexity, or didn't know what to build next — Trilo is built for you.",
       },
     },
     {
@@ -256,7 +264,7 @@ const faqSchema = {
       name: "When will Trilo launch?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Trilo is launching in 2026. You can join the waitlist now to get early access and be among the first to plan smarter.",
+        text: "Trilo is launching in 2026. You can join the waitlist now to get early access and be among the first to experience continuous product development guidance.",
       },
     },
     {
@@ -264,7 +272,7 @@ const faqSchema = {
       name: "What development platforms does Trilo integrate with?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Trilo integrates with a wide range of build platforms via MCP, including Cursor, Lovable, Bolt.new, VS Code, Replit, Windsurf, GitHub, Vercel, Supabase, Linear, Notion, Figma, and Builder.io.",
+        text: "Trilo integrates with build platforms and development tools via MCP, including Cursor, Lovable, Bolt.new, VS Code, Replit, Windsurf, GitHub, Vercel, Supabase, Linear, Notion, Figma, and Builder.io. The goal is for Trilo to exist inside the builder's workflow, not outside it.",
       },
     },
     {
@@ -272,7 +280,7 @@ const faqSchema = {
       name: "Is Trilo free?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Trilo will offer a free tier when it launches. Join the waitlist to be among the first to get early access and exclusive pricing.",
+        text: "Trilo will offer a free tier when it launches. A premium tier called FastTrack will provide deeper execution support, structured task breakdowns, and advanced comparison features. Join the waitlist for early access and exclusive pricing.",
       },
     },
     {
@@ -280,7 +288,23 @@ const faqSchema = {
       name: "How is Trilo different from ChatGPT or other AI tools?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Unlike general AI chatbots, Trilo is purpose-built for software architecture planning. It generates structured, actionable engineering blueprints with technology stack recommendations, system architecture diagrams, development timelines, cost breakdowns, and build-vs-buy analyses — then sends them directly to your IDE or build platform via MCP.",
+        text: "ChatGPT and similar tools are stateless — every conversation starts from scratch. Trilo maintains structured state and semantic memory (RAG) across your entire product lifecycle. It remembers your decisions, understands your constraints, and provides guidance based on what has already been decided — not generic suggestions. AI in Trilo powers explanation and interaction, but decisions are stored as structured records, not chat history.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is the Trilo Board?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "The Trilo Board is the execution and tracking layer where tasks, milestones, and progress are tracked. Unlike a generic project board, every task on the Trilo Board is linked to the architecture decision that created it — so planning and execution are never separate. What you decided is always connected to what you're building.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How does Trilo remember my decisions?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Trilo uses a structured state layer combined with semantic memory (RAG). Architecture decisions, tech stack choices, feature scope, constraints, and progress are stored explicitly — not as chat logs. Conversations are retrievable, and all future guidance is contextual to what has already been decided. The system never resets.",
       },
     },
   ],
@@ -289,9 +313,9 @@ const faqSchema = {
 const videoSchema = {
   "@context": "https://schema.org",
   "@type": "VideoObject",
-  name: "Trilo — From Idea to Execution",
+  name: "Trilo — The Lifecycle Protocol",
   description:
-    "Watch how Trilo transforms your product idea into a complete engineering blueprint with AI-powered architecture planning, tech stack recommendations, timelines, and cost estimates.",
+    "See how Trilo continuously guides product development — from architecture decisions to trade-off comparisons to execution tracking. A state-aware system that remembers every decision and guides what should happen next.",
   thumbnailUrl: `${SITE_URL}/api/video-thumbnail`,
   uploadDate: "2026-03-13T00:00:00Z",
   contentUrl: `${SITE_URL}/Trilo__Idea_to_Execution.mp4`,
@@ -341,7 +365,7 @@ const webSiteSchema = {
   name: "Trilo",
   url: SITE_URL,
   description:
-    "AI-powered software architecture and development planning platform. From idea to blueprint in minutes.",
+    "A state-aware product development system. Continuously guide decisions, compare trade-offs, and track execution — with memory that never resets.",
   publisher: {
     "@type": "Organization",
     name: "Trilo",

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Trilo — From Idea to Architecture in Minutes";
+export const alt = "Trilo — Decide, Compare, Build. Continuously.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -89,7 +89,7 @@ export default async function OGImage() {
               textAlign: "center",
             }}
           >
-            From idea to architecture
+            From idea to product
           </div>
           <div
             style={{
@@ -102,7 +102,7 @@ export default async function OGImage() {
               color: "transparent",
             }}
           >
-            in minutes
+            continuously
           </div>
         </div>
 
@@ -117,7 +117,7 @@ export default async function OGImage() {
             lineHeight: 1.5,
           }}
         >
-          AI-powered blueprint • Tech stack • Architecture • Timeline • Cost
+          Decide • Compare • Execute • Track — with memory that never resets
         </div>
 
         {/* Bottom bar */}

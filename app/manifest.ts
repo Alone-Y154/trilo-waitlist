@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Trilo — From Idea to Architecture in Minutes",
+    name: "Trilo — Decide, Compare, Build. Continuously.",
     short_name: "Trilo",
     description:
-      "AI-powered software architecture and development planning. Turn your idea into a complete engineering blueprint with tech stack, architecture, timeline, and cost — then build via MCP.",
+      "A state-aware product development system that continuously guides builders in deciding, comparing, and executing how their product is built — with memory that never resets. Lives inside your editor.",
     start_url: "/",
     display: "standalone",
     background_color: "#030305",

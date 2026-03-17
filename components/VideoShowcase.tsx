@@ -74,7 +74,7 @@ export default function VideoShowcase() {
             <span className="gradient-text">Clarity</span>
           </h2>
           <p className="text-text-secondary text-lg max-w-2xl mx-auto leading-relaxed">
-            Watch how Trilo transforms your workflow — from idea to execution.
+            Watch how Trilo continuously guides decisions, compares trade-offs, and tracks execution.
           </p>
         </div>
 

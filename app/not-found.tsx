@@ -63,14 +63,14 @@ export default function NotFound() {
           </div>
         </div>
 
-        {/* Blueprint-style error description */}
+        {/* System-style error description */}
         <div className="relative mb-10">
-          {/* Dashed border like a blueprint annotation */}
+          {/* Dashed border like a system annotation */}
           <div className="inline-block border-2 border-dashed border-border/60 rounded-xl px-8 py-6">
             <div className="flex items-center justify-center gap-2 mb-3">
               <span className="w-2 h-2 rounded-full bg-danger animate-pulse" />
               <span className="font-mono text-xs text-danger/80 tracking-widest uppercase">
-                Blueprint Not Found
+                Route Not Found
               </span>
             </div>
 
@@ -80,7 +80,7 @@ export default function NotFound() {
 
             <p className="text-text-secondary text-sm md:text-base leading-relaxed max-w-md mx-auto">
               Looks like you&apos;ve navigated to an unplanned route.
-              Even the best blueprints have boundaries.
+              Even the best systems have boundaries.
             </p>
           </div>
         </div>
@@ -101,7 +101,7 @@ export default function NotFound() {
             href="/"
             className="h-12 px-8 flex items-center justify-center rounded-xl bg-accent text-bg font-semibold hover:bg-accent-light active:scale-[0.97] transition-all duration-200"
           >
-            Back to Blueprint
+            Back to Home
           </a>
           <a
             href="/#waitlist"
@@ -146,7 +146,7 @@ export default function NotFound() {
         </div>
 
         <p className="mt-6 text-xs text-text-dim font-mono">
-          error.code: ROUTE_NOT_IN_BLUEPRINT · trilo v0.1.0
+          error.code: ROUTE_NOT_FOUND · trilo v0.1.0
         </p>
       </div>
     </div>

@@ -51,6 +51,11 @@
       "sourceType": "github",
       "computedHash": "04c1df896cc2c9ef824d618b95d21686c5b8e24e5cb32b3d6fe9d97d4b661536"
     },
+    "privacy-policy": {
+      "source": "phuryn/pm-skills",
+      "sourceType": "github",
+      "computedHash": "4f79d99d3bc7d1a14108bbff25d28cce0f86a70d89edb1ef908f30001b176a9c"
+    },
     "proactive-agent": {
       "source": "halthelobster/proactive-agent",
       "sourceType": "github",
@@ -80,6 +85,11 @@
       "source": "wshobson/agents",
       "sourceType": "github",
       "computedHash": "0fc7b79d08ee5168d46c6887014cbe5bd02f2c5e458858470e20fc8ecedefb46"
+    },
+    "terms-page-generator": {
+      "source": "kostja94/marketing-skills",
+      "sourceType": "github",
+      "computedHash": "56a9c83e29d5971356d697b60c462e9f41e769da5c7cff9bfbe9965a31e12172"
     },
     "ui-ux-pro-max": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",

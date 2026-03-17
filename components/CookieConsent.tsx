@@ -63,7 +63,13 @@ export default function CookieConsent() {
             <p className="text-xs text-text-secondary leading-relaxed">
               We use analytics cookies to understand how you interact with our
               site and improve your experience. No personal data is sold or
-              shared with third parties.
+              shared with third parties.{" "}
+              <a
+                href="/privacy#cookies"
+                className="text-accent hover:text-accent-light underline underline-offset-2 transition-colors duration-200"
+              >
+                Learn more
+              </a>
             </p>
           </div>
 

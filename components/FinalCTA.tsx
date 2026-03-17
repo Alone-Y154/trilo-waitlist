@@ -40,12 +40,12 @@ export default function FinalCTA() {
 
         <h2 id="waitlist-heading" className="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-5">
           Be the first to{" "}
-          <span className="gradient-text">plan smarter</span>
+          <span className="gradient-text">build with clarity</span>
         </h2>
 
         <p className="text-text-secondary text-lg mb-10 leading-relaxed">
-          Stop guessing. Stop over-engineering. Get an architecture-driven plan
-          that turns your idea into reality.
+          Stop guessing. Stop losing context. Get a system that guides every decision,
+          remembers every trade-off, and tracks your execution — continuously.
         </p>
 
         {/* Form */}

@@ -85,7 +85,7 @@ export default function FlowDemo() {
     // Step 5: Timeline + costs
     timers.push(setTimeout(() => setStep(5), 6800));
 
-    // Step 6: Blueprint ready
+    // Step 6: Decision loop live
     timers.push(setTimeout(() => setStep(6), 9000));
 
     return () => {
@@ -112,7 +112,7 @@ export default function FlowDemo() {
             See Trilo in action
           </h2>
           <p className="text-text-secondary text-lg max-w-xl mx-auto">
-            Watch how a product idea transforms into a complete engineering blueprint
+            Watch how Trilo turns a product idea into guided decisions, comparisons, and a living plan
           </p>
         </div>
 
@@ -142,7 +142,7 @@ export default function FlowDemo() {
             {/* ── Step 1-2: Describe ── */}
             {step >= 1 && (
               <div style={{ animation: "fade-in-up 0.5s cubic-bezier(0.16,1,0.3,1) both" }}>
-                <StepLabel num={1} text="Describe your idea" />
+                <StepLabel num={1} text="Describe what you're building" />
                 <div className="bg-bg rounded-xl border border-border p-4 min-h-[52px] flex items-center">
                   <span className="font-mono text-sm text-text-secondary break-all">
                     {typedText}
@@ -165,7 +165,7 @@ export default function FlowDemo() {
                   <path d="M12 2a10 10 0 019.95 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
                 <span className="text-sm font-medium text-accent">
-                  Analyzing architecture requirements…
+                  Understanding requirements and mapping decisions…
                 </span>
               </div>
             )}
@@ -173,7 +173,7 @@ export default function FlowDemo() {
             {/* ── Step 4: Architecture ── */}
             {step >= 4 && (
               <div style={{ animation: "fade-in-up 0.5s cubic-bezier(0.16,1,0.3,1) both" }}>
-                <StepLabel num={2} text="Recommended stack" />
+                <StepLabel num={2} text="Guided stack decisions" />
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5">
                   {techStack.map((tech, i) => (
                     <div
@@ -265,10 +265,10 @@ export default function FlowDemo() {
                 </div>
                 <div>
                   <span className="font-semibold text-text text-sm block">
-                    Your blueprint is ready
+                    First decisions — locked in
                   </span>
                   <span className="text-xs text-text-secondary">
-                    7 weeks · 6 services · $75/mo estimated infrastructure
+                    7 weeks · 6 services · $75/mo — and Trilo keeps guiding from here
                   </span>
                 </div>
               </div>
@@ -278,10 +278,10 @@ export default function FlowDemo() {
           {/* Step indicator bar */}
           <div className="flex items-center justify-center gap-3 py-4 border-t border-border bg-bg-card/40">
             {[
-              { label: "Describe", active: step >= 1 },
-              { label: "Analyze", active: step >= 4 },
-              { label: "Plan", active: step >= 5 },
-              { label: "Ready", active: step >= 6 },
+              { label: "Understand", active: step >= 1 },
+              { label: "Guide", active: step >= 4 },
+              { label: "Compare", active: step >= 5 },
+              { label: "Track", active: step >= 6 },
             ].map((s, i, arr) => (
               <div key={s.label} className="flex items-center gap-2.5">
                 <div
