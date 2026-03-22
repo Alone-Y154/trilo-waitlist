@@ -1,10 +1,8 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { trackSectionViewed } from "@/lib/analytics";
-
-/* ─── Tool definitions with brand colors ─── */
 
 const innerRing = [
   { name: "Cursor", abbr: "Cu", color: "#00A0FF" },
@@ -26,7 +24,6 @@ const outerRing = [
   { name: "Notion", abbr: "No", color: "#FFFFFFCC" },
 ];
 
-/* ─── Orbital position helper ─── */
 function getOrbitPos(angle: number, radius: number) {
   const rad = (angle * Math.PI) / 180;
   return {
@@ -44,41 +41,51 @@ export default function MCPOrbit() {
 
   useEffect(() => {
     const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
+      ([entry]) => {
+        if (entry.isIntersecting) {
           setVisible(true);
           trackSectionViewed("integrations");
         }
       },
       { threshold: 0.15 },
     );
-    if (ref.current) obs.observe(ref.current);
+
+    if (ref.current) {
+      obs.observe(ref.current);
+    }
+
     return () => obs.disconnect();
   }, []);
 
-  /* JS-driven rotation — logos stay perfectly upright */
-  const animate = useCallback((time: number) => {
-    if (lastTimeRef.current === 0) lastTimeRef.current = time;
-    const delta = time - lastTimeRef.current;
-    lastTimeRef.current = time;
-    // ~4 degrees per second = full rotation in 90s
-    setRotation((prev) => (prev + (delta / 1000) * 4) % 360);
-    rafRef.current = requestAnimationFrame(animate);
-  }, []);
-
   useEffect(() => {
-    if (!visible) return;
+    if (!visible) {
+      return;
+    }
+
+    const animate = (time: number) => {
+      if (lastTimeRef.current === 0) {
+        lastTimeRef.current = time;
+      }
+
+      const delta = time - lastTimeRef.current;
+      lastTimeRef.current = time;
+      setRotation((prev) => (prev + (delta / 1000) * 4) % 360);
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
     rafRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [visible, animate]);
+
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      lastTimeRef.current = 0;
+    };
+  }, [visible]);
 
   return (
     <section ref={ref} id="integrations" aria-labelledby="integrations-heading" className="relative py-24 md:py-32 overflow-hidden">
-      {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-accent/[0.03] blur-[180px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6">
-        {/* Header */}
         <div
           className={`text-center mb-16 md:mb-20 transition-all duration-700 ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
@@ -88,31 +95,27 @@ export default function MCPOrbit() {
             Connected Ecosystem
           </span>
           <h2 id="integrations-heading" className="font-display text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-tight mb-4">
-            Decide here.{" "}
-            <span className="text-text-secondary">Build anywhere.</span>
+            Decide here. <span className="text-text-secondary">Build anywhere.</span>
           </h2>
           <p className="text-text-secondary text-lg max-w-2xl mx-auto leading-relaxed">
-            Trilo syncs your decisions, architecture context, and execution state directly into your favorite tools — so nothing gets lost between where you plan and where you build.
+            Trilo syncs your decisions, architecture context, and execution state directly into your
+            favorite tools so nothing gets lost between where you plan and where you build.
           </p>
         </div>
 
-        {/* Orbit visualization */}
         <div
           className={`relative flex items-center justify-center transition-all duration-1000 delay-300 ${
             visible ? "opacity-100 scale-100" : "opacity-0 scale-90"
           }`}
         >
-          {/* Orbit container — fixed aspect ratio */}
           <div className="relative w-full max-w-[600px] aspect-square mx-auto">
-
-            {/* Outer orbit track (static ring) */}
             <div className="absolute inset-0 rounded-full border border-border/30" />
 
-            {/* Outer orbit nodes — positioned via JS, NO CSS rotation on content */}
             {outerRing.map((tool, i) => {
               const baseAngle = (360 / outerRing.length) * i;
               const currentAngle = baseAngle + rotation;
               const pos = getOrbitPos(currentAngle, 50);
+
               return (
                 <ToolNode
                   key={tool.name}
@@ -125,14 +128,13 @@ export default function MCPOrbit() {
               );
             })}
 
-            {/* Inner orbit track (static ring) */}
             <div className="absolute inset-[18%] rounded-full border border-border/40" />
 
-            {/* Inner orbit nodes — rotate opposite direction */}
             {innerRing.map((tool, i) => {
               const baseAngle = (360 / innerRing.length) * i;
-              const currentAngle = baseAngle - rotation * 1.5; // faster, opposite
+              const currentAngle = baseAngle - rotation * 1.5;
               const pos = getOrbitPos(currentAngle, 50);
+
               return (
                 <ToolNode
                   key={tool.name}
@@ -141,12 +143,10 @@ export default function MCPOrbit() {
                   visible={visible}
                   delay={300 + i * 80}
                   size="md"
-                  ring="inner"
                 />
               );
             })}
 
-            {/* MCP Connection pulses */}
             {visible && (
               <>
                 <Pulse delay={0} angle={30} />
@@ -158,25 +158,22 @@ export default function MCPOrbit() {
               </>
             )}
 
-            {/* Center: Trilo logo */}
             <div className="absolute inset-[32%] flex items-center justify-center">
               <div
                 className={`relative flex items-center justify-center w-full h-full transition-all duration-700 delay-200 ${
                   visible ? "opacity-100 scale-100" : "opacity-0 scale-75"
                 }`}
               >
-                {/* Glow rings */}
                 <div className="absolute inset-0 rounded-full bg-accent/[0.06] animate-pulse" />
                 <div
                   className="absolute -inset-3 rounded-full border border-accent/10"
                   style={{ animation: "pulse-glow 4s ease-in-out infinite" }}
                 />
 
-                {/* Core */}
                 <div className="relative w-full h-full rounded-full bg-bg-card border border-accent/25 flex flex-col items-center justify-center shadow-[0_0_60px_rgba(0,232,162,0.12)] overflow-hidden">
                   <Image
                     src="/trilo-logo.png"
-                    alt="Trilo — Connected to your tools"
+                    alt="Trilo connected to your tools"
                     width={120}
                     height={120}
                     className="w-[60%] h-[60%] object-contain rounded-xl"
@@ -191,7 +188,6 @@ export default function MCPOrbit() {
           </div>
         </div>
 
-        {/* Bottom labels */}
         <div
           className={`flex flex-wrap items-center justify-center gap-3 mt-14 transition-all duration-700 delay-700 ${
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
@@ -215,38 +211,32 @@ export default function MCPOrbit() {
   );
 }
 
-/* ─── Orbiting Tool Node (NO rotation — stays upright) ─── */
-
 interface ToolNodeProps {
   tool: { name: string; abbr: string; color: string };
   pos: { top: string; left: string };
   visible: boolean;
   delay: number;
   size: "sm" | "md";
-  ring?: "inner" | "outer";
 }
 
-function ToolNode({
-  tool,
-  pos,
-  visible,
-  delay,
-  size,
-}: ToolNodeProps) {
+function ToolNode({ tool, pos, visible, delay, size }: ToolNodeProps) {
   const nodeSize = size === "md" ? "w-12 h-12 md:w-14 md:h-14" : "w-10 h-10 md:w-12 md:h-12";
   const fontSize = size === "md" ? "text-xs md:text-sm" : "text-[10px] md:text-xs";
+  const adjustedPos =
+    size === "md"
+      ? {
+          top: `${18 + (parseFloat(pos.top) / 100) * 64}%`,
+          left: `${18 + (parseFloat(pos.left) / 100) * 64}%`,
+        }
+      : pos;
 
   return (
     <div
       className="absolute"
       style={{
-        top: pos.top,
-        left: pos.left,
+        top: adjustedPos.top,
+        left: adjustedPos.left,
         transform: "translate(-50%, -50%)",
-        /* Position inside the inner ring area for inner nodes */
-        ...(size === "md"
-          ? { top: `${18 + (parseFloat(pos.top) / 100) * 64}%`, left: `${18 + (parseFloat(pos.left) / 100) * 64}%` }
-          : {}),
       }}
     >
       <div
@@ -259,18 +249,14 @@ function ToolNode({
           transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       >
-        {/* Glow on hover */}
         <div
           className="absolute -inset-1 rounded-full opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-300"
           style={{ backgroundColor: `${tool.color}20` }}
         />
 
-        {/* Node circle */}
         <div
           className={`relative ${nodeSize} rounded-full bg-bg-card border flex items-center justify-center cursor-default transition-all duration-300 group-hover:border-opacity-60`}
-          style={{
-            borderColor: `${tool.color}30`,
-          }}
+          style={{ borderColor: `${tool.color}30` }}
         >
           <span
             className={`${fontSize} font-bold`}
@@ -280,7 +266,6 @@ function ToolNode({
           </span>
         </div>
 
-        {/* Tooltip */}
         <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded bg-bg-elevated border border-border text-[10px] text-text-secondary whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
           {tool.name}
         </div>
@@ -289,15 +274,11 @@ function ToolNode({
   );
 }
 
-/* ─── Connection Pulse ─── */
-
 function Pulse({ delay, angle }: { delay: number; angle: number }) {
   return (
     <div
       className="absolute top-1/2 left-1/2 w-0 h-0"
-      style={{
-        transform: `translate(-50%, -50%) rotate(${angle}deg)`,
-      }}
+      style={{ transform: `translate(-50%, -50%) rotate(${angle}deg)` }}
     >
       <div
         className="absolute w-1.5 h-1.5 rounded-full bg-accent/50"
